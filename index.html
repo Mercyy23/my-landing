@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ru" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NeuralFlow — AI Productivity Engine</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НейроПоток — ИИ для продуктивности</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            neon: '#b829f0',
-            'neon-light': '#d066ff',
-            'neon-dim': '#7c1aab',
-            dark: { 900: '#0a0a0f', 800: '#111118', 700: '#1a1a24', 600: '#242432' }
-          },
-          boxShadow: {
-            neon: '0 0 20px rgba(184,41,240,.35), 0 0 60px rgba(184,41,240,.12)',
-            'neon-sm': '0 0 8px rgba(184,41,240,.3)',
+            neon: '#a855f7',
+            'neon-light': '#c084fc',
+            'neon-dark': '#7c3aed',
+            surface: '#0f0f1a',
+            'surface-light': '#1a1a2e',
+            'surface-border': '#2a2a40',
           }
         }
       }
@@ -26,227 +24,181 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    .glow-border { border: 1px solid rgba(184,41,240,.25); }
-    .glow-border:hover { border-color: rgba(184,41,240,.6); box-shadow: 0 0 24px rgba(184,41,240,.2); }
-    .gradient-text { background: linear-gradient(135deg, #d066ff 0%, #b829f0 50%, #7c1aab 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glow { box-shadow: 0 0 30px rgba(168,85,247,0.3), 0 0 60px rgba(168,85,247,0.1); }
+    .glow-text { text-shadow: 0 0 20px rgba(168,85,247,0.5); }
+    .glow-btn { box-shadow: 0 0 20px rgba(168,85,247,0.4), 0 0 40px rgba(168,85,247,0.2); }
+    .glow-btn:hover { box-shadow: 0 0 30px rgba(168,85,247,0.6), 0 0 60px rgba(168,85,247,0.3); }
+    .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 0 25px rgba(168,85,247,0.25); }
   </style>
 </head>
-<body class="bg-dark-900 text-gray-200 antialiased">
+<body class="bg-surface text-gray-100 antialiased">
 
-  <!-- Nav -->
-  <nav class="fixed top-0 inset-x-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-white/5">
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="#" class="flex items-center gap-2 text-xl font-bold tracking-tight">
-        <span class="text-neon">&#9670;</span> NeuralFlow
-      </a>
+  <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-lg border-b border-surface-border">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-2xl font-extrabold text-neon-light glow-text">НейроПоток</a>
       <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
-        <a href="#features" class="hover:text-neon-light transition">Features</a>
-        <a href="#pricing" class="hover:text-neon-light transition">Pricing</a>
-        <a href="#cta" class="hover:text-neon-light transition">Get Started</a>
+        <a href="#features" class="hover:text-neon-light transition">Возможности</a>
+        <a href="#pricing" class="hover:text-neon-light transition">Тарифы</a>
+        <a href="#cta" class="hover:text-neon-light transition">Контакты</a>
       </div>
-      <a href="#cta" class="hidden md:inline-flex items-center gap-2 bg-neon hover:bg-neon-light text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition shadow-neon-sm">
-        Get Started
-      </a>
-      <button id="menu-btn" class="md:hidden text-gray-400 hover:text-neon-light transition">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3 text-sm text-gray-400">
-      <a href="#features" class="block hover:text-neon-light transition">Features</a>
-      <a href="#pricing" class="block hover:text-neon-light transition">Pricing</a>
-      <a href="#cta" class="block bg-neon text-white text-center font-semibold px-5 py-2.5 rounded-lg transition">Get Started</a>
+      <a href="#cta" class="bg-neon hover:bg-neon-dark text-white text-sm font-semibold px-5 py-2 rounded-lg transition glow-btn">Начать</a>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="relative pt-32 pb-24 px-6 overflow-hidden">
-    <div class="absolute inset-0 opacity-20" style="background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(184,41,240,.45),transparent)"></div>
-    <div class="relative max-w-4xl mx-auto text-center">
-      <p class="text-neon-light text-sm font-semibold tracking-widest uppercase mb-4">AI-Powered Productivity</p>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-        Ship faster with <span class="gradient-text">NeuralFlow</span>
+  <section class="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.12)_0%,transparent_70%)]"></div>
+    <div class="relative text-center max-w-3xl">
+      <p class="text-neon-light font-semibold text-sm tracking-widest uppercase mb-4">ИИ-помощник нового поколения</p>
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+        Умножьте свою<br><span class="text-neon-light glow-text">продуктивность</span>
       </h1>
-      <p class="mt-6 text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-        Automate workflows, generate code, and supercharge your team's output — all from one intelligent workspace that learns how you work.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#cta" class="bg-neon hover:bg-neon-light text-white font-semibold px-8 py-3.5 rounded-lg transition shadow-neon text-base">
-          Get Started Free
-        </a>
-        <a href="#features" class="border border-white/10 hover:border-neon/50 text-gray-300 hover:text-white font-medium px-8 py-3.5 rounded-lg transition text-base">
-          See Features
-        </a>
+      <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-xl mx-auto">Автоматизируйте рутину, получайте insights за секунды и фокусируйтесь на том, что действительно важно.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#cta" class="bg-neon hover:bg-neon-dark text-white font-bold px-8 py-4 rounded-xl text-lg transition glow-btn">Начать бесплатно</a>
+        <a href="#features" class="border border-surface-border hover:border-neon text-gray-300 hover:text-neon-light font-semibold px-8 py-4 rounded-xl text-lg transition">Узнать больше</a>
       </div>
-      <p class="mt-4 text-xs text-gray-500">No credit card required &middot; Free plan available</p>
     </div>
   </section>
 
-  <!-- Features -->
   <section id="features" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <p class="text-neon-light text-sm font-semibold tracking-widest uppercase text-center mb-3">Features</p>
-      <h2 class="text-3xl sm:text-4xl font-bold text-center tracking-tight">Everything you need to move faster</h2>
-      <p class="mt-4 text-gray-400 text-center max-w-2xl mx-auto">NeuralFlow combines intelligent automation, code generation, and team collaboration into a single seamless experience.</p>
+    <div class="max-w-7xl mx-auto">
+      <p class="text-neon-light font-semibold text-sm tracking-widest uppercase text-center mb-3">Возможности</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-16">Всё, что нужно для <span class="text-neon-light">эффективной работы</span></h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Card 1 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Instant Code Gen</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Generate production-ready code in seconds. Supports 30+ languages with context-aware completions.</p>
+          <h3 class="text-lg font-bold mb-2">Мгновенные ответы</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Получайте точные ответы на рабочие вопросы за секунды. ИИ анализирует ваши данные и контекст.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Smart Workflows</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Automate repetitive tasks with AI-driven pipelines that adapt to your team's patterns over time.</p>
+          <h3 class="text-lg font-bold mb-2">Автоматизация задач</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Делегируйте повторяющиеся задачи ИИ — от отчётов до планирования встреч.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Team Collaboration</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Real-time multiplayer editing, shared AI sessions, and role-based access built in.</p>
+          <h3 class="text-lg font-bold mb-2">Умная аналитика</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Визуализация процессов, прогнозирование сроков и выявление узких мест.</p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Enterprise Security</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">SOC 2 Type II certified. End-to-end encryption, SSO, and audit logs out of the box.</p>
+          <h3 class="text-lg font-bold mb-2">Безопасность данных</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Шифрование корпоративного уровня. Ваши данные никогда не используются для обучения.</p>
         </div>
 
-        <!-- Card 5 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Deep Analytics</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Track productivity gains, AI usage, and ROI with rich dashboards and custom reports.</p>
+          <h3 class="text-lg font-bold mb-2">Командная работа</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Общий контекст для всей команды. ИИ понимает роли, проекты и приоритеты каждого.</p>
         </div>
 
-        <!-- Card 6 -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-7 transition group">
-          <div class="w-12 h-12 flex items-center justify-center bg-neon/10 text-neon-light rounded-xl mb-5 group-hover:bg-neon/20 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+        <div class="bg-surface-light border border-surface-border rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-neon-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">150+ Integrations</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Connect GitHub, Slack, Jira, Notion, Figma, and more with one-click plug-and-play.</p>
+          <h3 class="text-lg font-bold mb-2">200+ интеграций</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Slack, Notion, Jira, GitHub, Google Workspace и другие — всё в одном потоке.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section id="pricing" class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-neon-light text-sm font-semibold tracking-widest uppercase text-center mb-3">Pricing</p>
-      <h2 class="text-3xl sm:text-4xl font-bold text-center tracking-tight">Simple, transparent pricing</h2>
-      <p class="mt-4 text-gray-400 text-center max-w-xl mx-auto">Start free. Scale when you're ready. No hidden fees, no surprises.</p>
+  <section id="pricing" class="py-24 px-6 bg-surface-light/50">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-neon-light font-semibold text-sm tracking-widest uppercase text-center mb-3">Тарифы</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-16">Выберите <span class="text-neon-light">свой план</span></h2>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
 
-      <div class="mt-16 grid md:grid-cols-3 gap-6 items-start">
-
-        <!-- Free -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-8 transition">
-          <h3 class="text-lg font-semibold text-white">Starter</h3>
-          <p class="text-gray-400 text-sm mt-1">For individuals exploring AI</p>
-          <p class="mt-6 text-4xl font-extrabold text-white">$0<span class="text-base font-medium text-gray-500">/mo</span></p>
-          <ul class="mt-8 space-y-3 text-sm text-gray-300">
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> 50 AI generations / day</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> 5 workflow automations</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Community support</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Basic analytics</li>
+        <div class="bg-surface border border-surface-border rounded-2xl p-8 card-hover flex flex-col">
+          <h3 class="text-lg font-bold mb-1">Старт</h3>
+          <p class="text-gray-500 text-sm mb-6">Для индивидуальных пользователей</p>
+          <div class="mb-6">
+            <span class="text-4xl font-extrabold">0 ₽</span>
+            <span class="text-gray-500 text-sm">/мес</span>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400 mb-8 flex-1">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>50 запросов в день</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Базовая аналитика</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>5 интеграций</li>
           </ul>
-          <a href="#cta" class="mt-8 block text-center border border-white/10 hover:border-neon/50 text-gray-300 hover:text-white font-semibold py-3 rounded-lg transition">
-            Get Started
-          </a>
+          <a href="#cta" class="block text-center border border-surface-border hover:border-neon text-gray-300 hover:text-neon-light font-semibold py-3 rounded-xl transition">Начать бесплатно</a>
         </div>
 
-        <!-- Pro (highlighted) -->
-        <div class="relative bg-dark-600 border border-neon/50 rounded-2xl p-8 shadow-neon transition">
-          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-neon text-white text-xs font-bold px-4 py-1 rounded-full">Most Popular</span>
-          <h3 class="text-lg font-semibold text-white">Pro</h3>
-          <p class="text-gray-400 text-sm mt-1">For teams shipping fast</p>
-          <p class="mt-6 text-4xl font-extrabold text-white">$29<span class="text-base font-medium text-gray-500">/mo</span></p>
-          <ul class="mt-8 space-y-3 text-sm text-gray-300">
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> Unlimited AI generations</li>
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> Unlimited workflows</li>
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> Priority support</li>
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> Advanced analytics</li>
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> Team collaboration</li>
-            <li class="flex items-start gap-2"><span class="text-neon-light mt-0.5">&#10003;</span> 150+ integrations</li>
+        <div class="bg-surface border-2 border-neon rounded-2xl p-8 card-hover flex flex-col relative glow">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-neon text-white text-xs font-bold px-4 py-1 rounded-full">Популярный</span>
+          <h3 class="text-lg font-bold mb-1">Про</h3>
+          <p class="text-gray-500 text-sm mb-6">Для продуктивных профессионалов</p>
+          <div class="mb-6">
+            <span class="text-4xl font-extrabold">1 490 ₽</span>
+            <span class="text-gray-500 text-sm">/мес</span>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400 mb-8 flex-1">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Безлимитные запросы</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Расширенная аналитика</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Все интеграции</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Приоритетная поддержка</li>
           </ul>
-          <a href="#cta" class="mt-8 block text-center bg-neon hover:bg-neon-light text-white font-semibold py-3 rounded-lg transition shadow-neon-sm">
-            Get Started
-          </a>
+          <a href="#cta" class="block text-center bg-neon hover:bg-neon-dark text-white font-bold py-3 rounded-xl transition glow-btn">Начать</a>
         </div>
 
-        <!-- Enterprise -->
-        <div class="bg-dark-700 glow-border rounded-2xl p-8 transition">
-          <h3 class="text-lg font-semibold text-white">Enterprise</h3>
-          <p class="text-gray-400 text-sm mt-1">For orgs with custom needs</p>
-          <p class="mt-6 text-4xl font-extrabold text-white">Custom</p>
-          <ul class="mt-8 space-y-3 text-sm text-gray-300">
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Everything in Pro</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> SSO &amp; SAML</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Audit logs</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Dedicated account manager</li>
-            <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#10003;</span> Custom model fine-tuning</li>
+        <div class="bg-surface border border-surface-border rounded-2xl p-8 card-hover flex flex-col">
+          <h3 class="text-lg font-bold mb-1">Бизнес</h3>
+          <p class="text-gray-500 text-sm mb-6">Для команд и компаний</p>
+          <div class="mb-6">
+            <span class="text-4xl font-extrabold">4 990 ₽</span>
+            <span class="text-gray-500 text-sm">/мес за пользователя</span>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400 mb-8 flex-1">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Всё из Про</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Командный контекст</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>SSO &amp; SAML</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-neon-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Выделенный менеджер</li>
           </ul>
-          <a href="#cta" class="mt-8 block text-center border border-white/10 hover:border-neon/50 text-gray-300 hover:text-white font-semibold py-3 rounded-lg transition">
-            Contact Sales
-          </a>
+          <a href="#cta" class="block text-center border border-surface-border hover:border-neon text-gray-300 hover:text-neon-light font-semibold py-3 rounded-xl transition">Связаться</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
   <section id="cta" class="py-24 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-30" style="background:radial-gradient(ellipse 50% 60% at 50% 100%,rgba(184,41,240,.4),transparent)"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.15)_0%,transparent_70%)]"></div>
     <div class="relative max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Ready to 10x your productivity?</h2>
-      <p class="mt-4 text-gray-400">Join 50,000+ developers and teams already shipping faster with NeuralFlow.</p>
-      <form class="mt-10 flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto" onsubmit="event.preventDefault();alert('Welcome aboard! 🚀')">
-        <input type="email" required placeholder="you@company.com" class="w-full bg-dark-700 border border-white/10 focus:border-neon/60 focus:outline-none text-white placeholder-gray-500 text-sm px-4 py-3 rounded-lg transition" />
-        <button type="submit" class="w-full sm:w-auto whitespace-nowrap bg-neon hover:bg-neon-light text-white font-semibold px-8 py-3 rounded-lg transition shadow-neon">
-          Get Started
-        </button>
+      <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Готовы <span class="text-neon-light glow-text">ускорить</span> работу?</h2>
+      <p class="text-gray-400 text-lg mb-10">Присоединяйтесь к 50 000+ пользователей, которые уже работают быстрее с НейроПоток.</p>
+      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Спасибо! Мы скоро свяжемся с вами.');">
+        <input type="email" placeholder="Ваш email" required class="flex-1 bg-surface-light border border-surface-border rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-neon transition">
+        <button type="submit" class="bg-neon hover:bg-neon-dark text-white font-bold px-8 py-4 rounded-xl transition glow-btn whitespace-nowrap">Начать</button>
       </form>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/5 py-12 px-6">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-      <p>&copy; 2026 NeuralFlow. All rights reserved.</p>
+  <footer class="border-t border-surface-border py-12 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+      <p>&copy; 2026 НейроПоток. Все права защищены.</p>
       <div class="flex gap-6">
-        <a href="#" class="hover:text-neon-light transition">Privacy</a>
-        <a href="#" class="hover:text-neon-light transition">Terms</a>
-        <a href="#" class="hover:text-neon-light transition">Docs</a>
+        <a href="#" class="hover:text-neon-light transition">Конфиденциальность</a>
+        <a href="#" class="hover:text-neon-light transition">Условия</a>
+        <a href="#" class="hover:text-neon-light transition">Поддержка</a>
       </div>
     </div>
   </footer>
-
-  <!-- Mobile menu toggle -->
-  <script>
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
-  </script>
 
 </body>
 </html>
